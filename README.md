@@ -81,4 +81,3 @@ server/   Node + Express + Socket.IO API, Postgres schema, tests
 web/      Static front-end (login + admin/tutor/student portals)
 docs/     Architecture, API, security, deployment
 ```
-# kb-connect
