@@ -1,0 +1,35 @@
+{
+  "name": "kb-connect-server",
+  "version": "1.0.0",
+  "description": "Kongu Brilliance Connect \u2014 secure in-portal chat, video and notifications for a tuition management system.",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "migrate": "node src/migrate.js",
+    "seed": "node src/seed.js",
+    "smoke": "node test/smoke.js",
+    "seed:ai": "node src/seed_ai.js",
+    "ai": "node -e \"import('./src/ai/engine.js').then(m=>m.runForAll()).then(n=>console.log(n))\""
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie": "^0.6.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.4.0",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.12.0",
+    "socket.io": "^4.7.5",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "socket.io-client": "^4.8.3"
+  }
+}
