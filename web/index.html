@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kongu Brilliance Connect</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ── LOGIN ─────────────────────────────────────────────── -->
+<div id="loginWrap" class="login-wrap">
+  <form class="login-card" id="loginForm">
+    <div class="brand"><div class="logo">🔥</div><h1>KB Connect</h1></div>
+    <div class="sub">Secure in-portal chat, calls &amp; notifications. No phone numbers, ever.</div>
+    <div class="field"><label>Username</label><input id="u" autocomplete="username" autofocus></div>
+    <div class="field"><label>Password</label><input id="p" type="password" autocomplete="current-password"></div>
+    <button class="btn btn-gold" type="submit">Sign in</button>
+    <div class="err" id="loginErr"></div>
+  </form>
+</div>
+
+<!-- ── APP SHELL ─────────────────────────────────────────── -->
+<div id="app" class="app hidden">
+  <!-- sidebar -->
+  <aside class="side">
+    <div class="top">
+      <span class="role-pill" id="rolePill">—</span>
+      <div style="font-size:15px;font-weight:800;margin-top:8px">KB Connect</div>
+    </div>
+    <nav class="nav" id="nav"></nav>
+    <div class="bottom">
+      <div class="me">
+        <div class="avatar" id="meAv">?</div>
+        <div><div class="n" id="meName">—</div>
+          <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)">
+            DND <span class="switch" id="dndSwitch" title="Silence incoming call alerts"><span class="knob"></span></span>
+          </div>
+        </div>
+      </div>
+      <button class="iconbtn bell" id="bell" title="Notifications">🔔<span class="badge hidden" id="badge">0</span></button>
+      <button class="btn btn-ghost btn-sm" id="logout">Exit</button>
+    </div>
+  </aside>
+
+  <!-- conversation list -->
+  <section class="list" id="listPane">
+    <div class="lhead"><h2 id="listTitle">Messages</h2></div>
+    <input class="search" id="search" placeholder="Search…">
+    <div class="convs" id="convs"></div>
+  </section>
+
+  <!-- chat pane -->
+  <section class="chat" id="chatPane">
+    <div class="empty" id="chatEmpty">
+      <div style="font-size:40px">💬</div>
+      <div>Select a contact to start a private, secure conversation.</div>
+    </div>
+    <div class="hidden" id="chatActive" style="display:flex;flex-direction:column;height:100vh">
+      <div class="chead">
+        <div class="who"><div class="avatar" id="peerAv">?</div>
+          <div><div style="font-weight:800" id="peerName">—</div>
+            <div style="font-size:11px;color:var(--muted)" id="peerSub"></div></div>
+        </div>
+        <div class="actions">
+          <button class="iconbtn" id="btnAudio" title="Audio call">📞</button>
+          <button class="iconbtn" id="btnVideo" title="Video call">🎥</button>
+        </div>
+      </div>
+      <div class="msgs" id="msgs"></div>
+      <div class="composer" id="composer">
+        <textarea id="input" placeholder="Type a message…" rows="1"></textarea>
+        <button class="btn btn-gold" id="send" style="width:auto;padding:0 20px">Send</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- admin views mount here (spans list+chat columns) -->
+  <section class="admin-view hidden" id="adminView"></section>
+</div>
+
+<!-- incoming call modal -->
+<div class="callmodal hidden" id="callModal">
+  <div class="callcard">
+    <div class="big-av ringing" id="callAv">?</div>
+    <h3 id="callName">Incoming call</h3>
+    <div class="ci" id="callInfo">…</div>
+    <div class="call-actions">
+      <button class="rbtn dec" id="callDecline" title="Decline">✕</button>
+      <button class="rbtn acc" id="callAccept" title="Accept">✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- jitsi overlay -->
+<div class="jitsi-overlay hidden" id="jitsiOverlay">
+  <div class="bar"><div style="font-weight:800">🎥 KB Secure Meeting</div>
+    <button class="btn btn-danger btn-sm" id="endCall">End &amp; leave</button></div>
+  <div id="jitsi"></div>
+</div>
+
+<div class="toast" id="toast"><div class="tt" id="toastT"></div><div class="tb" id="toastB"></div></div>
+
+<script src="/socket.io/socket.io.js"></script>
+<!-- Jitsi external API is loaded lazily from the configured domain when a call starts -->
+<script src="app.js"></script>
+</body>
+</html>
